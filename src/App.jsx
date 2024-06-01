@@ -1,10 +1,11 @@
-//import React from 'react';
-import Print from './components/Print';
+
+import Body from './components/Body';
+
 
 function App() {
   return (
     <>
-      <Print />
+      <Body/>
     </>
   );
 }
