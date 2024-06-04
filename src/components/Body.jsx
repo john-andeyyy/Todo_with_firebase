@@ -17,7 +17,8 @@ function Body() {
             description: 'eat well.',
             time: '10:01 pm',
             completed: false
-        },
+        }, 
+        
         {
             id: 2,
             title: 'crispy pata',
