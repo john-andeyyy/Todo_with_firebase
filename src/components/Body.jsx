@@ -5,21 +5,30 @@ function Body() {
     const [showCreateTodo, setShowCreateTodo] = useState(false);
     const [showMark, setShowMark] = useState(false);
     const [showUpdate, setShowUpdate] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [showCompletedOnly, setShowCompletedOnly] = useState(false);
 
     const [todos, setTodos] = useState([
         {
             id: 1,
-            title: 'Default Todo',
-            description: 'This is a default todo.',
+            title: 'eat',
+            description: 'eat well.',
             time: '10:01',
             completed: false
         },
         {
             id: 2,
-            title: 'Default',
-            description: ' default todo.',
+            title: 'crispy pata',
+            description: '',
             time: '01:01',
             completed: true
+        },
+        {
+            id: 3,
+            title: 'carboheti',
+            description: 'carbonara with spaghetti',
+            time: '01:01',
+            completed: false
         }
     ]);
 
@@ -92,36 +101,77 @@ function Body() {
         }
     };
 
+    const handleSearchInputChange = (value) => {
+        setSearchQuery(value.target.value);
+    };
+
+    const handleShowCompletedOnlyChange = () => {
+        setShowCompletedOnly(!showCompletedOnly);
+    };
+
+    const filteredTodos = todos.filter(todo => {
+        const matchesSearchQuery = todo.title.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCompletedFilter = showCompletedOnly ? todo.completed : true;
+        return matchesSearchQuery && matchesCompletedFilter;
+    });
+
     return (
         <>
-            <div className="mx-auto px-4">
+            <div className="mx-auto px-4 ">
                 <Header />
                 <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto">TODAY</h1>
-                <div className="">
-                    {todos.map((todo) => (
-                        <div key={todo.id} className={`flex p-3 rounded-xl py-5 my-5 w-[31rem] mx-auto bg-white`}>
-                            <button id="icon" onClick={() => toggleMark(todo)} >
-                                <span className="material-symbols-outlined">
-                                    <span className={todo.completed ? "text-green-500" : "opacity-30"}>
-                                        {todo.completed ? "check_circle" : "circle"}
-                                    </span>
-                                </span>
+
+                {/* //! Search */}
+                <input
+                    type="search"
+                    placeholder="Search Todos"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                    className="flex w-[21rem] py-2 px-4 rounded-lg border border-gray focus:outline-none shadow my-4 text-sm mx-auto"
+                />
+
+                {/* //! Show Completed Only */}
+                <div className="flex mx-auto w-[31rem] ">
+                    <label className="flex items-center text-sm">
+                        <input
+                            type="checkbox"
+                            checked={showCompletedOnly}
+                            onChange={handleShowCompletedOnlyChange}
+                            className="form-checkbox h-5 w-5"
+                        />
+                        <span className="text-black font-bold pl-3">Show Completed Only</span>
+                    </label>
+                </div>
+
+                {/* //! Show the list of TODO */}
+                <div>
+                    {filteredTodos.map((todo) => (
+                        <div key={todo.id} className={`flex p-3 rounded-xl py-5 my-5 w-[31rem] mx-auto bg-white shadow-md shadow-gray-300`}>
+                            <button id="icon" onClick={() => toggleMark(todo)} className='px-3'>
+                                <input
+                                    type="checkbox"
+                                    checked={todo.completed}
+                                    onChange={() => toggleMark(todo)}
+                                    className='form-checkbox h-5 w-5'
+                                />
                             </button>
+
                             <div id="text">
-                                <h4 className="font-bold pb-1 px-1">{todo.title}</h4>
+                                <h4 className="font-bold pb-1 px-1 capitalize">{todo.title}</h4>
                                 <p className="text-xs text-gray-400">{todo.time}</p>
                             </div>
                         </div>
                     ))}
                 </div>
+
                 <div className="fixed bottom-0 right-0">
-                    <button className="bg-blue-500 px-3 py-1 pt--5 text-5xl text-white font-bold rounded-xl" onClick={toggleCreateTodo}>
+                    <button className="bg-blue-500 px-3 py-1 pt--5 text-5xl text-white font-bold rounded-xl"
+                        onClick={toggleCreateTodo}>
                         +
                     </button>
                 </div>
 
-
-                {/* //! show mark as done */}
+                {/* //! Show mark as done */}
                 {showMark && currentTodo && (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white rounded-3xl py-5 px-4 m-5 w-[31rem] mx-auto">
@@ -158,7 +208,8 @@ function Body() {
                         </div>
                     </div>
                 )}
-                {/* //! show create to do */}
+
+                {/* //! Show create to do */}
                 {showCreateTodo && (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white px-6 py-5 rounded-2xl shadow w-[31rem]">
@@ -188,7 +239,8 @@ function Body() {
                         </div>
                     </div>
                 )}
-                {/* //! whow update form */}
+
+                {/* //! Show update form */}
                 {showUpdate && (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white px-6 py-5 rounded-2xl shadow w-[31rem]">

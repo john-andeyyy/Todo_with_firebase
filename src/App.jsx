@@ -1,6 +1,6 @@
 
 import Body from './components/Body';
-document.body.style.backgroundColor = '#212121';
+// document.body.style.backgroundColor = '#0E0E11';
 
 
 function App() {
