@@ -8,32 +8,38 @@ function Body() {
     const [searchQuery, setSearchQuery] = useState('');
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
 
+
+
     const [todos, setTodos] = useState([
         {
             id: 1,
             title: 'eat',
             description: 'eat well.',
-            time: '10:01',
+            time: '10:01 pm',
             completed: false
         },
         {
             id: 2,
             title: 'crispy pata',
             description: '',
-            time: '01:01',
+            time: '01:01 am',
             completed: true
         },
         {
             id: 3,
-            title: 'carboheti',
+            title: 'carboheticarboheticoheticarboheticarboheti',
             description: 'carbonara with spaghetti',
-            time: '01:01',
+            time: '01:01 am',
             completed: false
         }
     ]);
 
     const toggleCreateTodo = () => {
         setShowCreateTodo(!showCreateTodo);
+
+        setNewTitle('');
+        setNewDescription('');
+        setNewCount('40');
     };
 
     const toggleMark = (todo) => {
@@ -55,20 +61,33 @@ function Body() {
         setShowUpdate(!showUpdate);
     };
 
+    const [Count, setNewCount] = useState('40');
+
+
     const addTodo = () => {
         if (newTitle.trim() !== '') {
-            const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-            setTodos([...todos, {
-                id: todos.length + 1,
-                title: newTitle,
-                description: newDescription,
-                time: currentTime,
-                completed: false
-            }]);
-            setNewTitle('');
-            setNewDescription('');
-            toggleCreateTodo();
+            setNewCount(Count - newTitle.length);
+
+
+            if (newTitle.length <= 40) {
+                const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                setTodos([...todos, {
+                    id: todos.length + 1,
+                    title: newTitle,
+                    description: newDescription,
+                    time: currentTime,
+                    completed: false
+                }]);
+                setNewTitle('');
+                setNewDescription('');
+                setNewCount('40');
+                toggleCreateTodo();
+            } else {
+                alert("the title must be only 40 character")
+            }
+
+
         }
     };
 
@@ -101,19 +120,15 @@ function Body() {
         }
     };
 
-    const handleSearchInputChange = (value) => {
-        setSearchQuery(value.target.value);
-    };
 
-    const handleShowCompletedOnlyChange = () => {
-        setShowCompletedOnly(!showCompletedOnly);
-    };
 
     const filteredTodos = todos.filter(todo => {
         const matchesSearchQuery = todo.title.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesCompletedFilter = showCompletedOnly ? todo.completed : true;
         return matchesSearchQuery && matchesCompletedFilter;
     });
+
+
 
     return (
         <>
@@ -126,27 +141,27 @@ function Body() {
                     type="search"
                     placeholder="Search Todos"
                     value={searchQuery}
-                    onChange={handleSearchInputChange}
-                    className="flex w-[21rem] py-2 px-4 rounded-lg border border-gray focus:outline-none shadow my-4 text-sm mx-auto"
+                    onChange={value => setSearchQuery(value.target.value)}
+                    className="flex w-[31rem] py-2 px-4 rounded-lg border border-gray focus:outline-none shadow my-4 text-sm mx-auto"
                 />
 
                 {/* //! Show Completed Only */}
-                <div className="flex mx-auto w-[31rem] ">
+                <div className="flex mx-auto w-[31rem] justify-end">
                     <label className="flex items-center text-sm">
+                        <span className="text-black font-bold px-3">Show Completed Only</span>
                         <input
                             type="checkbox"
                             checked={showCompletedOnly}
-                            onChange={handleShowCompletedOnlyChange}
+                            onChange={() => setShowCompletedOnly(!showCompletedOnly)}
                             className="form-checkbox h-5 w-5"
                         />
-                        <span className="text-black font-bold pl-3">Show Completed Only</span>
                     </label>
                 </div>
 
                 {/* //! Show the list of TODO */}
                 <div>
                     {filteredTodos.map((todo) => (
-                        <div key={todo.id} className={`flex p-3 rounded-xl py-5 my-5 w-[31rem] mx-auto bg-white shadow-md shadow-gray-300`}>
+                        <div key={todo.id} className={`flex p-3 rounded-xl py-5 my-5 w-[31rem] mx-auto bg-white shadow-md shadow-gray-300 self-start`}>
                             <button id="icon" onClick={() => toggleMark(todo)} className='px-3'>
                                 <input
                                     type="checkbox"
@@ -157,8 +172,8 @@ function Body() {
                             </button>
 
                             <div id="text">
-                                <h4 className="font-bold pb-1 px-1 capitalize">{todo.title}</h4>
-                                <p className="text-xs text-gray-400">{todo.time}</p>
+                                <h4 className="font-bold pb-1 px-1 capitalize break-words">{todo.title}</h4>
+                                <p className="text-xs text-gray-400 break-words">{todo.time}</p>
                             </div>
                         </div>
                     ))}
@@ -176,10 +191,10 @@ function Body() {
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white rounded-3xl py-5 px-4 m-5 w-[31rem] mx-auto">
                             <div className="flex justify-between py-2">
-                                <h2 className="font-bold text-xl">Title: {currentTodo.title}</h2>
+                                <h2 className="font-bold text-xl break-words ">Title: <span className='pl-4' >{currentTodo.title}</span></h2>
                                 <p className='text-gray-400'>{currentTodo.time}</p>
                             </div>
-                            <p className='text-gray-400'>Description: <br /><span className='text-black pl-4'>{currentTodo.description}</span></p>
+                            <p className='text-gray-400'>Description: <br /><span className='text-black pl-4 break-words'>{currentTodo.description}</span></p>
                             {!currentTodo.completed && (
                                 <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
                                     <button
@@ -218,9 +233,14 @@ function Body() {
                                 type="text"
                                 placeholder='Task Name'
                                 value={newTitle}
-                                onChange={(e) => setNewTitle(e.target.value)}
+                                maxLength='40'
+                                onChange={(e) => {
+                                    setNewTitle(e.target.value)
+                                    setNewCount(40 - e.target.value.length)
+                                }}
                                 className="w-full py-3 px-3 rounded-lg border border-gray focus:outline-none shadow my-4 text-sm"
                             />
+                            <p>{Count} / 40</p>
                             <textarea
                                 placeholder='Add Description'
                                 value={newDescription}
