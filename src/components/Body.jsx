@@ -20,7 +20,13 @@ function Body() {
 
 
     const [todos, setTodos] = useState([
-
+        // {
+        //     id: 1,
+        //     title: 'eat',
+        //     description: 'eat well.',
+        //     time: '10:01 pm',
+        //     completed: false
+        // },
         {
             id: 1,
             title: 'crispy pata',
