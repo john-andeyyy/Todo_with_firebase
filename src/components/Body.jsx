@@ -12,7 +12,7 @@ function Body() {
     const [searchQuery, setSearchQuery] = useState('');
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
 
-    //! for update
+    //! for updates
     const [currentTodo, setCurrentTodo] = useState(null);
     const [updatedTitle, setUpdatedTitle] = useState('');
     const [updatedDescription, setUpdatedDescription] = useState('');
@@ -20,7 +20,7 @@ function Body() {
 
 
     const [todos, setTodos] = useState([
-       
+
         {
             id: 1,
             title: 'crispy pata',
@@ -63,7 +63,7 @@ function Body() {
         }));
         setShowMark(false);
     };
-    
+
     const RemoveComplete = (id) => {
         setTodos(todos.map(todo => {
             if (todo.id === id) {
@@ -74,7 +74,7 @@ function Body() {
         }));
         setShowMark(false);
     };
-    
+
 
     RemoveComplete
 
@@ -136,7 +136,7 @@ function Body() {
 
 
 
-                
+
 
                 <TodoList
                     todos={filteredTodos}
