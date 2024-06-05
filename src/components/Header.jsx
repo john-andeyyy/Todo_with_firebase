@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header() {
     return (
-        <div className="flex justify-between pt-4 px-3 w-[32rem] mx-auto">
+        <div className="flex justify-between pt-4 px-3 w-[32rem] mx-auto text-white">
             <div>
                 <span className="material-symbols-outlined">
                     menu
@@ -10,7 +10,7 @@ function Header() {
                 
             </div>
             <div>
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined ">
                     notifications
                 </span>
             </div>

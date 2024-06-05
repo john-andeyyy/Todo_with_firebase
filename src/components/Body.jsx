@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { TodoList } from './TodoList';
 import { CreateTodo } from './CreateTodo';
 import { Mark_as_done } from './MarkAsDone';
@@ -11,26 +12,24 @@ function Body() {
     const [searchQuery, setSearchQuery] = useState('');
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
 
+    //! for update
+    const [currentTodo, setCurrentTodo] = useState(null);
+    const [updatedTitle, setUpdatedTitle] = useState('');
+    const [updatedDescription, setUpdatedDescription] = useState('');
 
 
 
     const [todos, setTodos] = useState([
-        // {
-        //     id: 1,
-        //     title: 'eat',
-        //     description: 'eat well.',
-        //     time: '10:01 pm',
-        //     completed: false
-        // },
+       
         {
-            id: 2,
+            id: 1,
             title: 'crispy pata',
             description: '',
             time: '01:01 am',
             completed: true
         },
         {
-            id: 3,
+            id: 2,
             title: 'carboheticarboheticoheticarboheticarboheticarboheticarboheticoheticarboheticarboheti',
             description: 'carbonara with spaghetti',
             time: '01:01 am',
@@ -46,10 +45,6 @@ function Body() {
         setCurrentTodo(todo);
         setShowMark(!showMark);
     };
-
-    const [currentTodo, setCurrentTodo] = useState(null);
-    const [updatedTitle, setUpdatedTitle] = useState('');
-    const [updatedDescription, setUpdatedDescription] = useState('');
 
     const toggleUpdate = (todo) => {
         setCurrentTodo(todo);
@@ -68,6 +63,20 @@ function Body() {
         }));
         setShowMark(false);
     };
+    
+    const RemoveComplete = (id) => {
+        setTodos(todos.map(todo => {
+            if (todo.id === id) {
+                return { ...todo, completed: !todo.completed };
+            } else {
+                return todo;
+            }
+        }));
+        setShowMark(false);
+    };
+    
+
+    RemoveComplete
 
     const updateTodo = () => {
         if (updatedTitle.trim() !== '') {
@@ -96,7 +105,7 @@ function Body() {
     return (
         <>
             <div className="px-2 ">
-                <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto">TODAY</h1>
+                <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto text-white">TODAY</h1>
 
                 <input
                     type="search"
@@ -108,7 +117,7 @@ function Body() {
 
                 <div className="flex mx-auto w-[31rem] justify-end">
                     <label className="flex items-center text-sm">
-                        <span className="text-black font-bold px-3">Show Completed Only</span>
+                        <span className="text-white font-bold px-3">Show Completed Only</span>
                         <input
                             type="checkbox"
                             checked={showCompletedOnly}
@@ -118,17 +127,22 @@ function Body() {
                     </label>
                 </div>
 
-                <TodoList
-                    todos={filteredTodos}
-                    toggleMark={toggleMark}
-                />
-
                 <div className="fixed bottom-0 right-0">
                     <button className="bg-blue-500 px-3 py-1 pt--5 text-5xl text-white font-bold rounded-xl"
                         onClick={toggleCreateTodo}>
                         +
                     </button>
                 </div>
+
+
+
+                
+
+                <TodoList
+                    todos={filteredTodos}
+                    toggleMark={toggleMark}
+                />
+
 
                 <CreateTodo
                     setTodos={setTodos}
@@ -141,6 +155,7 @@ function Body() {
                     showMark={showMark}
                     toggleMark={toggleMark}
                     markCompleted={markCompleted}
+                    RemoveComplete={RemoveComplete}
                     setTodos={setTodos}
                     todos={todos}
                     setShowMark={setShowMark}
