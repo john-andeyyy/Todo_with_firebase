@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Header from './Header';
+import { ShowTodo } from './ShowTodo';
 
 function Body() {
     const [showCreateTodo, setShowCreateTodo] = useState(false);
@@ -8,8 +9,6 @@ function Body() {
     const [searchQuery, setSearchQuery] = useState('');
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
 
-
-
     const [todos, setTodos] = useState([
         {
             id: 1,
@@ -17,8 +16,7 @@ function Body() {
             description: 'eat well.',
             time: '10:01 pm',
             completed: false
-        }, 
-        
+        },
         {
             id: 2,
             title: 'crispy pata',
@@ -37,7 +35,6 @@ function Body() {
 
     const toggleCreateTodo = () => {
         setShowCreateTodo(!showCreateTodo);
-
         setNewTitle('');
         setNewDescription('');
         setNewCount('40');
@@ -53,8 +50,8 @@ function Body() {
     const [currentTodo, setCurrentTodo] = useState(null);
     const [updatedTitle, setUpdatedTitle] = useState('');
     const [updatedDescription, setUpdatedDescription] = useState('');
+    const [Count, setNewCount] = useState('40');
 
-    // ! passing the param to the update form
     const toggleUpdate = (todo) => {
         setCurrentTodo(todo);
         setUpdatedTitle(todo.title);
@@ -62,15 +59,9 @@ function Body() {
         setShowUpdate(!showUpdate);
     };
 
-    const [Count, setNewCount] = useState('40');
-
-
     const addTodo = () => {
         if (newTitle.trim() !== '') {
-
             setNewCount(Count - newTitle.length);
-
-
             if (newTitle.length <= 40) {
                 const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 setTodos([...todos, {
@@ -85,10 +76,8 @@ function Body() {
                 setNewCount('40');
                 toggleCreateTodo();
             } else {
-                alert("the title must be only 40 character")
+                alert("The title must be only 40 characters.");
             }
-
-
         }
     };
 
@@ -121,15 +110,11 @@ function Body() {
         }
     };
 
-
-
     const filteredTodos = todos.filter(todo => {
         const matchesSearchQuery = todo.title.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesCompletedFilter = showCompletedOnly ? todo.completed : true;
         return matchesSearchQuery && matchesCompletedFilter;
     });
-
-
 
     return (
         <>
@@ -137,7 +122,6 @@ function Body() {
                 <Header />
                 <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto">TODAY</h1>
 
-                {/* //! Search */}
                 <input
                     type="search"
                     placeholder="Search Todos"
@@ -146,7 +130,6 @@ function Body() {
                     className="flex w-[31rem] py-2 px-4 rounded-lg border border-gray focus:outline-none shadow my-4 text-sm mx-auto"
                 />
 
-                {/* //! Show Completed Only */}
                 <div className="flex mx-auto w-[31rem] justify-end">
                     <label className="flex items-center text-sm">
                         <span className="text-black font-bold px-3">Show Completed Only</span>
@@ -159,26 +142,10 @@ function Body() {
                     </label>
                 </div>
 
-                {/* //! Show the list of TODO */}
-                <div>
-                    {filteredTodos.map((todo) => (
-                        <div key={todo.id} className={`flex p-3 rounded-xl py-5 my-5 w-[31rem] mx-auto bg-white shadow-md shadow-gray-300 self-start`}>
-                            <button id="icon" onClick={() => toggleMark(todo)} className='px-3'>
-                                <input
-                                    type="checkbox"
-                                    checked={todo.completed}
-                                    onChange={() => toggleMark(todo)}
-                                    className='form-checkbox h-5 w-5'
-                                />
-                            </button>
-
-                            <div id="text">
-                                <h4 className="font-bold pb-1 px-1 capitalize break-words">{todo.title}</h4>
-                                <p className="text-xs text-gray-400 break-words">{todo.time}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <ShowTodo
+                    todos={filteredTodos}
+                    toggleMark={toggleMark}
+                />
 
                 <div className="fixed bottom-0 right-0">
                     <button className="bg-blue-500 px-3 py-1 pt--5 text-5xl text-white font-bold rounded-xl"
@@ -187,7 +154,6 @@ function Body() {
                     </button>
                 </div>
 
-                {/* //! Show mark as done */}
                 {showMark && currentTodo && (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white rounded-3xl py-5 px-4 m-5 w-[31rem] mx-auto">
@@ -225,7 +191,6 @@ function Body() {
                     </div>
                 )}
 
-                {/* //! Show create to do */}
                 {showCreateTodo && (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white px-6 py-5 rounded-2xl shadow w-[31rem]">
@@ -261,7 +226,6 @@ function Body() {
                     </div>
                 )}
 
-                {/* //! Show update form */}
                 {showUpdate && (
                     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
                         <div className="bg-white px-6 py-5 rounded-2xl shadow w-[31rem]">
