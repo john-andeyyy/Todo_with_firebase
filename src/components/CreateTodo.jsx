@@ -1,6 +1,34 @@
+import { useState } from 'react';
 
-export function CreateTodo({ newTitle, setNewTitle, newDescription, setNewDescription,
-    addTodo, toggleCreateTodo, Count, setNewCount, showCreateTodo }) {
+export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
+    const [newTitle, setNewTitle] = useState('');
+    const [newDescription, setNewDescription] = useState('');
+    const [count, setCount] = useState(40);
+
+    const addTodo = () => {
+        if (newTitle.trim() !== '') {
+            setCount(40 - newTitle.length);
+            if (newTitle.length <= 40) {
+                const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                setTodos(todos => [
+                    ...todos,
+                    {
+                        id: todos.length + 1,
+                        title: newTitle,
+                        description: newDescription,
+                        time: currentTime,
+                        completed: false
+                    }]);
+                setNewTitle('');
+                setNewDescription('');
+                setCount(40);
+                toggleCreateTodo();
+            } else {
+                alert("The title must be only 40 characters.");
+            }
+        }
+    };
+
     return (
         <>
             {showCreateTodo && (
@@ -14,11 +42,11 @@ export function CreateTodo({ newTitle, setNewTitle, newDescription, setNewDescri
                             maxLength='40'
                             onChange={(e) => {
                                 setNewTitle(e.target.value);
-                                setNewCount(40 - e.target.value.length);
+                                setCount(40 - e.target.value.length);
                             }}
                             className="w-full py-3 px-3 rounded-lg border border-gray focus:outline-none shadow my-4 text-sm"
                         />
-                        <p>{Count} / 40</p>
+                        <p>{count} / 40</p>
                         <textarea
                             placeholder='Add Description'
                             value={newDescription}
