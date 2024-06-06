@@ -82,7 +82,6 @@ function Body() {
     };
 
 
-    RemoveComplete
 
     const updateTodo = () => {
         if (updatedTitle.trim() !== '') {
