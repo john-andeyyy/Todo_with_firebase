@@ -4,7 +4,7 @@ function Modal({ children, isVisible, handleClose }) {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-blue-500 bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div className="relative bg-white rounded-3xl py-5 px-4 m-5 w-[31rem] mx-auto">
                 <button
                     onClick={handleClose}
