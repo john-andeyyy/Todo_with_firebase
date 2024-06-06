@@ -20,23 +20,17 @@ function Body() {
 
 
     const [todos, setTodos] = useState([
-        // {
-        //     id: 1,
-        //     title: 'eat',
-        //     description: 'eat well.',
-        //     time: '10:01 pm',
-        //     completed: false
-        // },
+
         {
             id: 1,
-            title: 'crispy pata',
+            title: 'test 12334',
             description: '',
             time: '01:01 am',
             completed: true
         },
         {
             id: 2,
-            title: 'carboheticarboheticoheticarboheticarboheticarboheticarboheticoheticarboheticarboheti',
+            title: 'test 123',
             description: 'carbonara with spaghetti',
             time: '01:01 am',
             completed: false
@@ -58,6 +52,8 @@ function Body() {
         setUpdatedDescription(todo.description);
         setShowUpdate(!showUpdate);
     };
+
+
 
     const markCompleted = (id) => {
         setTodos(todos.map(todo => {
@@ -146,6 +142,7 @@ function Body() {
                 <TodoList
                     todos={filteredTodos}
                     toggleMark={toggleMark}
+                    toggleUpdate={toggleUpdate}
                 />
 
 
@@ -153,7 +150,7 @@ function Body() {
                     setTodos={setTodos}
                     toggleCreateTodo={toggleCreateTodo}
                     showCreateTodo={showCreateTodo}
-                />
+                    />
 
                 <Mark_as_done
                     currentTodo={currentTodo}
@@ -176,7 +173,9 @@ function Body() {
                     setUpdatedDescription={setUpdatedDescription}
                     setShowUpdate={setShowUpdate}
                     updateTodo={updateTodo}
-                />
+                    setTodos={setTodos}
+                    todos={todos}
+                    />
             </div>
         </>
     );

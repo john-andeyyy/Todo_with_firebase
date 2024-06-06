@@ -1,29 +1,28 @@
-export function SingleTodo({ todo, toggleMark }) {
+import React from 'react';
+
+export function SingleTodo({ todo, toggleMark, toggleUpdate }) {
     return (
         <div
-
-
-            
             key={todo.id}
-            className={`flex px-4 rounded-xl py-5  my-5 w-[31rem] mx-auto
-            bg-white shadow-md shadow-gray-300 self-start hover:bg-gray-100 text-center  `}
+            className={`flex px-4 rounded-xl my-5 w-[31rem] mx-auto bg-white shadow-md shadow-gray-300 self-start hover:bg-gray-100 text-center`}
         >
             <button
                 id="icon"
                 onClick={() => toggleMark(todo)}
-                className='px-3'
+                className='px-3  py-5'
             >
                 <input
                     type="checkbox"
                     checked={todo.completed}
                     onChange={() => toggleMark(todo)}
-                    className='form-checkbox h-5 w-5 '
+                    className='form-checkbox h-5 w-5'
                 />
             </button>
+
             <button
                 id="text"
-                onClick={() => toggleMark(todo)}
-                className="flex flex-col flex-1 cursor-pointer"
+                onClick={() => toggleUpdate(todo)}
+                className="flex flex-col flex-1 cursor-pointer  py-5"
             >
                 <h4 className="font-bold pb-1 px-1 capitalize break-all text-justify">
                     {todo.title}
@@ -32,6 +31,9 @@ export function SingleTodo({ todo, toggleMark }) {
                     {todo.time}
                 </p>
             </button>
+
         </div>
     );
 }
+
+export default SingleTodo;

@@ -10,6 +10,9 @@ function App() {
     <>
       <Header /> 
       <Body />
+      {/* <Modal/> */}
+
+   
     </>
   );
 }
