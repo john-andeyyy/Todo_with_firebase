@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
 
-export function Updateform({ showUpdate, currentTodo, updatedTitle, setUpdatedTitle, setUpdatedDescription, setShowUpdate,
+export function Updateform({ showUpdate, setShowUpdate, currentTodo, updatedTitle, setUpdatedTitle, setUpdatedDescription, 
     updatedDescription, updateTodo, setTodos, todos }) {
 
     const [count, setCount] = useState(40);
 
     return (
-        <Modal isVisible={showUpdate} handleClose={() => setShowUpdate(false)}>
+        <Modal isVisible={showUpdate} handleClose={() => setShowUpdate(false)} >
             {currentTodo && ( 
                 //! if the currentTodo have a value it will have render all code inside the  ( )
                 <div>

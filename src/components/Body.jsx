@@ -7,7 +7,10 @@ import { Updateform } from './UpdateForm';
 
 function Body() {
     const [showCreateTodo, setShowCreateTodo] = useState(false);
+
     const [showMark, setShowMark] = useState(false);
+
+    
     const [showUpdate, setShowUpdate] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
@@ -23,7 +26,7 @@ function Body() {
 
         {
             id: 1,
-            title: 'test 12334',
+            title: 'test 12334123341233412334123341233412334123341233412334123341233412334',
             description: '',
             time: '01:01 am',
             completed: true
@@ -93,7 +96,6 @@ function Body() {
                 }
             }));
             setShowUpdate(false);
-            setShowMark(false);
         }
     };
 
@@ -148,18 +150,15 @@ function Body() {
 
                 <CreateTodo
                     setTodos={setTodos}
-                    toggleCreateTodo={toggleCreateTodo}
                     showCreateTodo={showCreateTodo}
+                    toggleCreateTodo={toggleCreateTodo}
                     />
 
                 <Mark_as_done
                     currentTodo={currentTodo}
                     showMark={showMark}
-                    toggleMark={toggleMark}
                     markCompleted={markCompleted}
                     RemoveComplete={RemoveComplete}
-                    setTodos={setTodos}
-                    todos={todos}
                     setShowMark={setShowMark}
                     toggleUpdate={toggleUpdate}
                 />

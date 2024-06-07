@@ -1,6 +1,6 @@
 import Modal from './Modal';
 
-export function Mark_as_done({ currentTodo, showMark, toggleMark, markCompleted, RemoveComplete, setTodos, todos, setShowMark }) {
+export function Mark_as_done({ currentTodo, markCompleted, RemoveComplete, setShowMark, showMark }) {
     return (
         <Modal isVisible={showMark} handleClose={() => setShowMark(false)}>
             {currentTodo && (
