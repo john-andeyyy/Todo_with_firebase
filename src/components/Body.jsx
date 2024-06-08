@@ -10,7 +10,7 @@ function Body() {
 
     const [showMark, setShowMark] = useState(false);
 
-    
+
     const [showUpdate, setShowUpdate] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
@@ -26,8 +26,8 @@ function Body() {
 
         {
             id: 1,
-            title: 'test 12334123341233412334123341233412334123341233412334123341233412334',
-            description: '',
+            title: 'test 526987',
+            description: 'q',
             time: '01:01 am',
             completed: true
         },
@@ -37,7 +37,14 @@ function Body() {
             description: 'carbonara with spaghetti',
             time: '01:01 am',
             completed: false
-        }
+        },
+        {
+            id: 3,
+            title: '1234',
+            description: '',
+            time: '01:01 am',
+            completed: true
+        },
     ]);
 
     const toggleCreateTodo = () => {
@@ -152,7 +159,7 @@ function Body() {
                     setTodos={setTodos}
                     showCreateTodo={showCreateTodo}
                     toggleCreateTodo={toggleCreateTodo}
-                    />
+                />
 
                 <Mark_as_done
                     currentTodo={currentTodo}
@@ -160,7 +167,7 @@ function Body() {
                     markCompleted={markCompleted}
                     RemoveComplete={RemoveComplete}
                     setShowMark={setShowMark}
-                    toggleUpdate={toggleUpdate}
+                // toggleUpdate={toggleUpdate}
                 />
 
                 <Updateform
@@ -174,7 +181,7 @@ function Body() {
                     updateTodo={updateTodo}
                     setTodos={setTodos}
                     todos={todos}
-                    />
+                />
             </div>
         </>
     );
