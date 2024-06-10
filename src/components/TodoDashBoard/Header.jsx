@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import '../style/BurgerMenu.css';  // Ensure the correct import of CSS file
-import NavBar from './NavBar/NavBar';
+// import '../style/BurgerMenu.';  // Ensure the correct import of CSS file
+// import '../NavBar/BurgerMenu.css';  // Ensure the correct import of CSS file
+import NavBar from '../NavBar/NavBar';
 
 function Header() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);

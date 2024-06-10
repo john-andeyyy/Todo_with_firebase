@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { TodoList } from './TodoList';
 import { CreateTodo } from './CreateTodo';
-import { Mark_as_done } from './MarkAsDone';
-import { Updateform } from './UpdateForm';
+import { Mark_as_done } from './TodoMarkAsDone';
+import { TodoUpdateForm } from './TodoUpdateForm';
 import Header from './Header';
 
-function Body() {
+function TodoDashboard() {
     const [showCreateTodo, setShowCreateTodo] = useState(false);
 
     const [showMark, setShowMark] = useState(false);
@@ -175,7 +175,7 @@ function Body() {
                 // toggleUpdate={toggleUpdate}
                 />
 
-                <Updateform
+                <TodoUpdateForm
                     showUpdate={showUpdate}
                     currentTodo={currentTodo}
                     updatedTitle={updatedTitle}
@@ -192,4 +192,4 @@ function Body() {
     );
 }
 
-export default Body;
+export default TodoDashboard;

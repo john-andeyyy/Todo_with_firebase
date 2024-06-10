@@ -14,10 +14,10 @@ export default function NavBar({ toggleSidebar }) {
                         <Link to="/" onClick={handleLinkClick}>Home</Link>
                     </li>
                     <li>
-                        <Link to="/Login" onClick={handleLinkClick}>Login</Link>
+                        <Link to="/LoginPage" onClick={handleLinkClick}>Login</Link>
                     </li>
                     <li>
-                        <Link to="/Signup" onClick={handleLinkClick}>Signup</Link>
+                        <Link to="/SignupPage" onClick={handleLinkClick}>Signup</Link>
                     </li>
                 </ul>
             </nav>

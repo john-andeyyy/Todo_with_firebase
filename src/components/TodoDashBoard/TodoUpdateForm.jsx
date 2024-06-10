@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
 
-export function Updateform({
+export function TodoUpdateForm({
     showUpdate, setShowUpdate, currentTodo,
     updatedTitle, setUpdatedTitle, updatedDescription, setUpdatedDescription,
     updateTodo, setTodos, todos
