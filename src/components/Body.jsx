@@ -4,6 +4,7 @@ import { TodoList } from './TodoList';
 import { CreateTodo } from './CreateTodo';
 import { Mark_as_done } from './MarkAsDone';
 import { Updateform } from './UpdateForm';
+import Header from './Header';
 
 function Body() {
     const [showCreateTodo, setShowCreateTodo] = useState(false);
@@ -114,6 +115,7 @@ function Body() {
 
     return (
         <>
+        <Header/>
             <div className="px-2 ">
                 <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto text-white">TODAY</h1>
 
