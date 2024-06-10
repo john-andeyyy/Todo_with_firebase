@@ -1,24 +1,21 @@
 import React from 'react';
-import Body from './components/Body';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import NavBar from './components/NavBar/NavBar'
-//   document.body.style.backgroundColor = '#0E0E11';
-
+// import Home from './components/NavBar/Home';
+import Login from './components/NavBar/Login';
+import Signup from './components/NavBar/Signup';
+import Body from './components/Body';
 
 function App() {
   return (
-    <>
-      {/* <Header />  */}
-      {/* <Body /> */}
-      {/* <Modal/> */}
-
-
-      <div className="">
-        <NavBar />
-      </div>
-
-
-    </>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Body />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
+      </Routes>
+    </Router>
   );
 }
 

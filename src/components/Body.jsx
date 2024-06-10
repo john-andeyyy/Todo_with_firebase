@@ -115,8 +115,11 @@ function Body() {
 
     return (
         <>
-        <Header/>
-            <div className="px-2 ">
+        {/* <Header/> */}
+            <div className=" ">
+
+
+                
                 <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto text-white">TODAY</h1>
 
                 <input
