@@ -11,15 +11,37 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
             setCount(40 - newTitle.length);
             if (newTitle.length <= 40) {
                 const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                setTodos(todos => [
-                    ...todos,
-                    {
-                        id: todos.length + 1,
-                        title: newTitle,
-                        description: newDescription,
-                        time: currentTime,
-                        completed: false
-                    }]);
+
+
+                setTodos(todos => {
+                    const maxId = todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) : 0;
+                    const newId = maxId + 1;
+
+                    return [
+                        ...todos,
+                        {
+                            id: newId,
+                            title: newTitle,
+                            description: newDescription,
+                            time: currentTime,
+                            completed: false
+                        }
+                    ];
+                });
+
+
+                // setTodos(todos => [
+                //     ...todos,
+                //     {
+                //         id: todos.length + 1,
+                //         title: newTitle,
+                //         description: newDescription,
+                //         time: currentTime,
+                //         completed: false
+                //     }]);
+
+
+
                 setNewTitle('');
                 setNewDescription('');
                 setCount(40);
@@ -28,6 +50,8 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
                 alert("The title must be only 40 characters.");
             }
         }
+
+        
     };
 
     const close = () => {

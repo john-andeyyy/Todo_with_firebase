@@ -105,6 +105,7 @@ function TodoDashboard() {
             }));
             setShowUpdate(false);
         }
+        // console.log(todos);
     };
 
     const filteredTodos = todos.filter(todo => {

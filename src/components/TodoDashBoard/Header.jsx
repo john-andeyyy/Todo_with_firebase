@@ -27,11 +27,12 @@ function Header() {
             {isSidebarOpen && (
                 <div className="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-4 ">
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-lg">Sidebar</h2>
+                        <h2 className="text-lg">Todo</h2>
                         <span className="material-symbols-outlined cursor-pointer" onClick={toggleSidebar}>
                             close
                         </span>
                     </div>
+
                     <NavBar toggleSidebar={toggleSidebar} />
                 </div>
             )}

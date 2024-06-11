@@ -9,7 +9,7 @@ export function SingleTodo({ todo, toggleMark, toggleUpdate }) {
             <button
                 id="icon"
                 onClick={() => toggleMark(todo)}
-                className='px-3  py-5'
+                className='px-3 py-5'
             >
                 <input
                     type="checkbox"
@@ -18,20 +18,14 @@ export function SingleTodo({ todo, toggleMark, toggleUpdate }) {
                     className='form-checkbox h-5 w-5'
                 />
             </button>
-
             <button
                 id="text"
                 onClick={() => toggleUpdate(todo)}
-                className="flex flex-col flex-1 cursor-pointer  py-5"
+                className="flex flex-col flex-1 cursor-pointer py-5"
             >
-                <h4 className="font-bold pb-1 px-1 capitalize break-all text-justify">
-                    {todo.title}
-                </h4>
-                <p className="text-xs text-gray-400 break-words">
-                    {todo.time}
-                </p>
+                <h4 className="font-bold pb-1 px-1 capitalize break-all text-justify">{todo.title}</h4>
+                <p className="text-xs text-gray-400 break-words">{todo.time}</p>
             </button>
-
         </div>
     );
 }

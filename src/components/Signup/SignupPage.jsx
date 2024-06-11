@@ -12,7 +12,9 @@ export default function SignUp() {
         setError(null);
 
         const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
-        const apiKey = 'AIzaSyAbAjVGmIw4UBxFLxYZOL7V1Cgu3qqV1dY';
+        const apiKey = import.meta.env.VITE_FIREBASEAPIKEY;
+
+        console.log(apiKey);
         const payload = {
             email: email,
             password: password,
@@ -33,7 +35,7 @@ export default function SignUp() {
             if (response.ok) {
                 console.log("User signed up successfully!", data);
 
-                navigate('/'); 
+                navigate('/TodoDashboard');
 
             } else {
                 setError(data.error.message);
@@ -50,7 +52,7 @@ export default function SignUp() {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-5">
                         <input
-                            className="flex w-[31rem] py-4 px-4 rounded-lg border border-gray focus:outline-none shadow text-sm mx-auto
+                            className="flex w-[31rem] py-4 px-4 rounded-lg border border-gray focus:outline-none shadow text-xl mx-auto
                         bg-[#222630] outline-none text-white transition-colors duration-100 border-solid focus:border-[#596A95] border-[#2B3040]"
                             name="email"
                             placeholder="Enter email"
@@ -59,11 +61,11 @@ export default function SignUp() {
                             onChange={(e) => setEmail(e.target.value)}
                             autoComplete='off'
                             required
-                            />
+                        />
                     </div>
                     <div className="mb-5">
                         <input
-                            className="flex w-[31rem] py-4 px-4 rounded-lg border border-gray focus:outline-none shadow text-sm mx-auto
+                            className="flex w-[31rem] py-4 px-4 rounded-lg border border-gray focus:outline-none shadow text-xl mx-auto
                         bg-[#222630] outline-none text-white transition-colors duration-100 border-solid focus:border-[#596A95] border-[#2B3040]"
                             name="password"
                             placeholder="Enter password"
@@ -75,8 +77,9 @@ export default function SignUp() {
                         />
                     </div>
                     {error && <p className="text-red-500">{error}</p>}
+                    
                     <button type="submit"
-                        className='font-semibold text-white bg-blue-500 px-10 py-2 rounded-lg hover:bg-blue-800'
+                        className='text-xl font-semibold text-white bg-blue-500 px-10 py-2 rounded-lg hover:bg-blue-800'
                     >Sign Up</button>
                 </form>
             </div>
