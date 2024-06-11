@@ -1,29 +1,43 @@
 // src/components/LoginPage.js
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
 
 
 
 export default function LoginPage() {
+    // const auth = getAuth();
+
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
 
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            // Redirect to another page or show a success message
-            alert('success');
-            navigate('/');
-        } catch (error) {
-            setError(error.message);
-        }
+
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                console.log(user)
+                navigate('/'); 
+
+                // ...S 
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('errorCode' + errorCode)
+                console.log('errorMessage' + errorMessage)
+                // ..
+            });
     };
 
     return (

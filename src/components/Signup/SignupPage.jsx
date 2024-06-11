@@ -1,6 +1,7 @@
 // src/components/SignUp.js
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+
 import { auth } from '../firebase/firebase';
 
 import { useNavigate } from 'react-router-dom';
@@ -16,14 +17,24 @@ export default function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-        try {
-            await createUserWithEmailAndPassword(auth, email, password);
-            alert('User created successfully');
-            navigate('/LoginPage'); 
 
-        } catch (error) {
-            setError(error.message);
-        }
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                console.log(user)
+                navigate('/');
+
+                // ...S 
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log('errorCode' + errorCode)
+                console.log('errorMessage' + errorMessage)
+                // ..
+            });
     };
 
     return (
@@ -33,8 +44,8 @@ export default function SignUp() {
             <div className="m-auto">
                 <h1 className='text-white font-bold text-center py-3'>Sign Up</h1>
                 <form onSubmit={handleSubmit}>
-                    
-                    
+
+
                     <div className="mb-5">
                         <input
                             className="flex w-[31rem] py-4 px-4 rounded-lg border border-gray focus:outline-none shadow text-sm mx-auto
