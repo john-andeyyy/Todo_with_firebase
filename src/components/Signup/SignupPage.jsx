@@ -1,11 +1,5 @@
-// src/components/SignUp.js
 import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-
-import { auth } from '../firebase/firebase';
-
 import { useNavigate } from 'react-router-dom';
-
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -13,39 +7,47 @@ export default function SignUp() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
 
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                console.log(user)
-                navigate('/');
+        const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
+        const apiKey = 'AIzaSyAbAjVGmIw4UBxFLxYZOL7V1Cgu3qqV1dY';
+        const payload = {
+            email: email,
+            password: password,
+            returnSecureToken: true
+        };
 
-                // ...S 
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log('errorCode' + errorCode)
-                console.log('errorMessage' + errorMessage)
-                // ..
+        try {
+            const response = await fetch(url + apiKey, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log("User signed up successfully!", data);
+
+                navigate('/'); 
+
+            } else {
+                setError(data.error.message);
+            }
+        } catch (error) {
+            setError('An error occurred. Please try again.');
+        }
     };
 
     return (
-
-
         <div className='text-center flex px-2'>
             <div className="m-auto">
                 <h1 className='text-white font-bold text-center py-3'>Sign Up</h1>
                 <form onSubmit={handleSubmit}>
-
-
                     <div className="mb-5">
                         <input
                             className="flex w-[31rem] py-4 px-4 rounded-lg border border-gray focus:outline-none shadow text-sm mx-auto
@@ -55,8 +57,9 @@ export default function SignUp() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            autoComplete='off'
                             required
-                        />
+                            />
                     </div>
                     <div className="mb-5">
                         <input
@@ -67,12 +70,11 @@ export default function SignUp() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            autoComplete='off'
                             required
                         />
                     </div>
-
-
-                    {error && <p>{error}</p>}
+                    {error && <p className="text-red-500">{error}</p>}
                     <button type="submit"
                         className='font-semibold text-white bg-blue-500 px-10 py-2 rounded-lg hover:bg-blue-800'
                     >Sign Up</button>
