@@ -7,7 +7,7 @@ export default function NavBar({ toggleSidebar }) {
     useEffect(() => {
         const storedExpiresIn = localStorage.getItem('localId');
         setIsUserLoggedIn(storedExpiresIn !== ''); // check if have a value id yes return true
-    }, []);
+    });
 
     const handleLinkClick = () => {
         toggleSidebar();
