@@ -25,7 +25,7 @@ export default function UserChangepass() {
         const url = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=';
 
 
-        const apiKey = import.meta.env.VITE_FIREBASEAPIKEY;
+        const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
         
         const payload = {
             idToken: idToken,

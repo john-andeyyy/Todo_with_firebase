@@ -12,7 +12,7 @@ export default function LoginPage() {
         setError(null);
 
         const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
-        const apiKey = import.meta.env.VITE_FIREBASEAPIKEY;
+        const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
         const payload = {
             email: email,
             password: password,
