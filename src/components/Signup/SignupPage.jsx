@@ -12,8 +12,7 @@ export default function SignUp() {
         setError(null);
 
         const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
-        const apiKey = 'AIzaSyAbAjVGmIw4UBxFLxYZOL7V1Cgu3qqV1dY';
-        // const apiKey = import.meta.env.VITE_FIREBASEAPIKEY;
+        const apiKey = import.meta.env.VITE_FIREBASEAPIKEY;
         
         console.log(apiKey);
         const payload = {
