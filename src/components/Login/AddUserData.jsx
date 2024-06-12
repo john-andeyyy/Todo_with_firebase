@@ -48,15 +48,30 @@ const AddUserData = () => {
     };
 
     return (
-        <div>
-            <h1>Add User Data</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required /><br /><br />
-                <label htmlFor="age">Age:</label>
-                <input type="number" id="age" value={age} onChange={(e) => setAge(e.target.value)} required /><br /><br />
-                <button type="submit">Add Data</button>
-            </form>
+        <div className='text-center flex px-3'>
+            <div className="m-auto">
+
+                <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto text-white">Add User Data</h1>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="name" className='text-white px-3'>Name:</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={name} onChange={(e) => setName(e.target.value)}
+                        className=' text-xl w-[28rem] p-2 '
+                        required />
+                    <br /><br />
+                    <label htmlFor="age" className='text-white px-3'>Age:</label>
+                    <input
+                        type="number"
+                        id="age"
+                        value={age}
+                        onChange={(e) => setAge(e.target.value)}
+                        className='text-xl  w-[28rem] p-2'
+                        required /><br /><br />
+                    <button type="submit" className='text-white text-xl bg-blue-500 rounded-lg p-3 font-semibold'>Add Data</button>
+                </form>
+            </div>
         </div>
     );
 };
