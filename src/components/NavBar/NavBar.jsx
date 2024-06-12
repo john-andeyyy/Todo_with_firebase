@@ -36,6 +36,14 @@ export default function NavBar({ toggleSidebar }) {
                                 </span>
                                 <Link to="/UserChangepass" onClick={handleLinkClick}>Change Password</Link>
                             </li>
+                            <li className='flex items-center'>
+                                <span className="material-symbols-outlined px-2">
+                                    add
+                                </span>
+                                <Link to="/AddUserData" onClick={handleLinkClick}>
+                                    Add data
+                                </Link>
+                            </li>
                             <li className="flex items-center">
                                 <span className="material-symbols-outlined px-2">
                                     logout
@@ -72,4 +80,3 @@ export default function NavBar({ toggleSidebar }) {
         </div>
     );
 }
-    

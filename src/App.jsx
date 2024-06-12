@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/TodoDashBoard/Header';
-// import Home from './components/NavBar/Home';
+
+
 import LoginPage from './components/Login/LoginPage';
 import SignupPage from './components/Signup/SignupPage';
 import TodoDashboard from './components/TodoDashBoard/TodoDashboard';
 import Landingpage from './components/Landingpage'
 import UserChangepass from './components/Login/UserChangepass';
+import AddUserData from './components/Login/AddUserData';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
         <Route path="/SignupPage" element={<SignupPage />} />
         <Route path="/TodoDashboard" element={<TodoDashboard />} />
         <Route path="/UserChangepass" element={<UserChangepass />} />
+        <Route path="/AddUserData" element={<AddUserData />} />
       </Routes>
     </Router>
   );
