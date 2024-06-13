@@ -55,6 +55,38 @@ export function TodoUpdateForm({
         } else {
             setAlert('Please enter a new title!');
         }
+
+    }
+
+
+        const Task_Delete = (id) => {
+
+
+            const localId = localStorage.getItem('localId');
+            const dburl = import.meta.env.VITE_FIREBASE_DB_URL;
+            const todoRef = `${dburl}/tasks/${localId}/TaskList/${id}.json`;
+
+            fetch(todoRef, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // body: JSON.stringify(updatedTodo)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update todo');
+                    }
+                    // ! for static web app only
+                    // updateTodo(updatedTodo);
+                    setIsEditVisible(false);
+                    setAlert('');
+                    setShowUpdate(false);
+                })
+                .catch(error => {
+                    console.error('Error updating todo:', error);
+                });
+        
     };
 
     return (
@@ -127,7 +159,8 @@ export function TodoUpdateForm({
 
                         <div className={`flex py-5 ${isEditVisible ? 'hidden' : ''}`}>
                             <button className='p-3 px-5 text-white rounded-xl font-semibold m-auto bg-red-500 w-full' onClick={() => {
-                                setTodos(todos.filter(todo => todo.id !== currentTodo.id));
+                                // setTodos(todos.filter(todo => todo.id !== currentTodo.id));
+                                Task_Delete(currentTodo.id)
                                 setShowUpdate(false);
                             }}>
                                 Delete
