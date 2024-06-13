@@ -126,11 +126,17 @@ function TodoDashboard() {
         // console.log(todos);
     };
 
+
+
+
     const filteredTodos = todos.filter(todo => {
-        const matchesSearchQuery = todo.title.includes(searchQuery.toLowerCase());
+        const todoTitleLower = todo.title.toLowerCase();
+        const searchQueryLower = searchQuery.toLowerCase();
+        const matchesSearchQuery = todoTitleLower.includes(searchQueryLower);
         const matchesCompletedFilter = showCompletedOnly ? todo.completed : true;
         return matchesSearchQuery && matchesCompletedFilter;
     });
+
     // console.log(todos);
 
     return (

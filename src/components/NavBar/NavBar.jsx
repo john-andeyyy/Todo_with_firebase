@@ -20,6 +20,8 @@ export default function NavBar({ toggleSidebar }) {
         localStorage.removeItem('expiresIn');
         localStorage.removeItem('idToken');
         localStorage.removeItem('localId');
+        localStorage.removeItem('expiryTime');
+
         handleLinkClick();
         setIsUserLoggedIn(false);
     };

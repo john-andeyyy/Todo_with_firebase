@@ -57,31 +57,37 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
 
     const addTodo = async (event) => {
         event.preventDefault();
-        if (newTitle !==''){
-            
-            
-            
+        if (newTitle !== '') {
+
+
+
             setCount(40 - newTitle.length);
-            
+
             if (newTitle.length <= 40) {
 
                 const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
                 // ! input users data
+
+                const email = localStorage.getItem('email');
+                const pass = localStorage.getItem('password');
+
                 const userData = {
                     // id:0,
-                title: newTitle,
+                    title: newTitle,
                     description: newDescription,
-                time: currentTime,
-                    completed: false
+                    time: currentTime,
+                    completed: false,
+                    // email: email,
+                    // pass: pass
                 };
 
                 const localid = localStorage.getItem('localId')
-            
+
                 // Define the Firebase Realtime Database URL
                 const dburl = import.meta.env.VITE_FIREBASE_DB_URL
                 const databaseURL = `${dburl}/tasks/${localid}/TaskList.json`
-            
+
 
                 try {
                     // Perform the post request
@@ -103,8 +109,8 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
                     console.log("Data successfully added:", data);
 
                     // ! reset the state
-                setNewTitle('');
-            setNewDescription('');
+                    setNewTitle('');
+                    setNewDescription('');
                     setCount(40);
                     toggleCreateTodo();
                 } catch (error) {
@@ -114,12 +120,12 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
 
             } else {
                 seterror("The title must be only 40 characters.");
-                }
-                
-                }else{
-                    
-                    seterror("Set The title.");
             }
+
+        } else {
+
+            seterror("Set The title.");
+        }
 
 
     };
