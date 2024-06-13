@@ -32,6 +32,12 @@ export default function NavBar({ toggleSidebar }) {
                         <>
                             <li className='flex items-center'>
                                 <span className="material-symbols-outlined px-2">
+                                    Dashboard
+                                </span>
+                                <Link to="/TodoDashboard" onClick={handleLinkClick}>Dashboard</Link>
+                            </li>
+                            <li className='flex items-center'>
+                                <span className="material-symbols-outlined px-2">
                                     lock
                                 </span>
                                 <Link to="/UserChangepass" onClick={handleLinkClick}>Change Password</Link>

@@ -3,53 +3,72 @@ import Modal from './Modal';
 
 export function TodoUpdateForm({
     showUpdate, setShowUpdate, currentTodo,
-    updatedTitle, setUpdatedTitle, updatedDescription, setUpdatedDescription,
     updateTodo, setTodos, todos
 }) {
     const [isEditVisible, setIsEditVisible] = useState(false);
-    const [alert, setalert] = useState()
+    const [alert, setAlert] = useState('');
     const [count, setCount] = useState(40);
 
-    // Update the count when the updatedTitle changes
+    const [updatedTitle, setUpdatedTitle] = useState('');
+    const [updatedDescription, setUpdatedDescription] = useState('');
+
     useEffect(() => {
         if (currentTodo) {
-            setCount(40 - updatedTitle.length);
+            setUpdatedTitle(currentTodo.title);
+            setUpdatedDescription(currentTodo.description);
+            setCount(40 - currentTodo.title.length);
         }
-    }, [updatedTitle]);
+    }, [currentTodo]);
 
+    const handleUpdateClick = (id) => {
+        if (updatedTitle.length > 0 && updatedTitle !== currentTodo.title) {
+            const updatedTodo = {
+                ...currentTodo,
+                title: updatedTitle,
+                description: updatedDescription
+            };
 
+            const localId = localStorage.getItem('localId');
+            const dburl = import.meta.env.VITE_FIREBASE_DB_URL;
+            const todoRef = `${dburl}/tasks/${localId}/TaskList/${id}.json`;
 
-    const handleUpdateClick = () => {
-        if (count != 40) {
-            updateTodo();
-            setIsEditVisible(false)
-            setalert()
-        } else (
-            setalert("Please Enter new Title!!!")
-        )
-
-
+            fetch(todoRef, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedTodo)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update todo');
+                    }
+                    // ! for static web app only
+                    // updateTodo(updatedTodo);
+                    setIsEditVisible(false);
+                    setAlert('');
+                    setShowUpdate(false);
+                })
+                .catch(error => {
+                    console.error('Error updating todo:', error);
+                });
+        } else {
+            setAlert('Please enter a new title!');
+        }
     };
-
-
 
     return (
         <Modal isVisible={showUpdate} handleClose={() => {
-            setShowUpdate(false)
-            setIsEditVisible(false)
+            setShowUpdate(false);
+            setIsEditVisible(false);
         }}>
             {currentTodo && (
                 <div>
-                    {/* //! show title and description only  */}
-
-
-
                     <div className={isEditVisible ? 'hidden' : ''}>
-
                         <div className="flex justify-between py-2">
                             <div className="flex-1">
                                 <h2 className="font-bold text-lg break-all">
-                                    <p>Title:</p> <span className='pl-4 capitalize font-normal  text-xl '>{currentTodo.title}</span>
+                                    <p>Title:</p> <span className='pl-4 capitalize font-normal text-xl'>{currentTodo.title}</span>
                                 </h2>
                             </div>
                             <div className="flex-shrink-0">
@@ -58,15 +77,12 @@ export function TodoUpdateForm({
                         </div>
 
                         <p className='pb-2 font-bold text-lg'>Description: <br />
-                            <span className='text-black pl-4  break-words capitalize font-normal text-xl '>
-
-                                {/*  currentTodo.description if empty it show nothing to show */}
+                            <span className='text-black pl-4 break-words capitalize font-normal text-xl'>
                                 {currentTodo.description ? currentTodo.description : 'Nothing to show'}
-                            </span></p>
+                            </span>
+                        </p>
                     </div>
 
-
-                    {/* //! this is the update inputs */}
                     <div id="edit" className={isEditVisible ? '' : 'hidden'}>
                         <h1 className='text-red-500 font-semibold py-2 text-xl text-center'>{alert}</h1>
                         <div id="Title" className='py-2'>
@@ -82,7 +98,6 @@ export function TodoUpdateForm({
                                 className="w-full py-3 px-3 rounded-lg border border-gray focus:outline-none shadow text-lg"
                             />
                             <p className='text-gray-400 pt-2'>{count} / 40</p>
-
                         </div>
 
                         <p className='text-gray-400'>Description :</p>
@@ -93,39 +108,32 @@ export function TodoUpdateForm({
                         />
 
                         <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
-                            <button className='w-full py-3' onClick={handleUpdateClick}>
+                            <button className='w-full py-3' onClick={() => handleUpdateClick(currentTodo.id)}>
                                 Update
                             </button>
                         </div>
 
-                        <button className=' p-5 px-5 font-semibold text-xl text-red-500' onClick={() => setIsEditVisible(!isEditVisible)}>
+                        <button className='p-5 px-5 font-semibold text-xl text-red-500' onClick={() => setIsEditVisible(false)}>
                             Discard
                         </button>
                     </div>
 
-
-
                     <div className={isEditVisible ? 'hidden' : ''}>
                         <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
-                            <button className='w-full py-3' onClick={() => setIsEditVisible(!isEditVisible)}>
-                                {/* {isEditVisible ? 'Back' : 'Edit'} */}
+                            <button className='w-full py-3' onClick={() => setIsEditVisible(true)}>
                                 Edit
                             </button>
                         </div>
 
-                        <div className={`flex  py-5 ${isEditVisible ? 'hidden' : ''}`}>
-                            <button className='p-3 px-5 text-white  rounded-xl font-semibold m-auto bg-red-500 w-full' onClick={() => {
+                        <div className={`flex py-5 ${isEditVisible ? 'hidden' : ''}`}>
+                            <button className='p-3 px-5 text-white rounded-xl font-semibold m-auto bg-red-500 w-full' onClick={() => {
                                 setTodos(todos.filter(todo => todo.id !== currentTodo.id));
                                 setShowUpdate(false);
                             }}>
                                 Delete
                             </button>
-
                         </div>
                     </div>
-
-
-
                 </div>
             )}
         </Modal>

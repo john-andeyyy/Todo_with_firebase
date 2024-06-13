@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { TodoList } from './TodoList';
 import { CreateTodo } from './CreateTodo';
@@ -25,28 +25,46 @@ function TodoDashboard() {
 
     const [todos, setTodos] = useState([
 
-        {
-            id: 1,
-            title: 'test 526987',
-            description: 'q',
-            time: '01:01 am',
-            completed: true
-        },
-        {
-            id: 2,
-            title: 'test 123',
-            description: 'carbonara with spaghetti',
-            time: '01:01 am',
-            completed: false
-        },
-        {
-            id: 3,
-            title: '1234',
-            description: '',
-            time: '01:01 am',
-            completed: true
-        },
     ]);
+
+
+
+
+
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const localId = localStorage.getItem('localId');
+    const dburl = import.meta.env.VITE_FIREBASE_DB_URL;
+    const databaseURL = `${dburl}/tasks/${localId}/TaskList.json`;
+
+    // Function to fetch tasks from the database (GET request)
+    const fetchTasks = async () => {
+        try {
+            const response = await fetch(databaseURL); // GET request to fetch tasks
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const data = await response.json();
+            const tasksArray = data ? Object.entries(data).map(([key, value]) => ({ id: key, ...value })) : [];
+            setTodos(tasksArray);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchTasks();
+    }, [todos]);
+
+
+
 
     const toggleCreateTodo = () => {
         setShowCreateTodo(!showCreateTodo);
@@ -109,10 +127,11 @@ function TodoDashboard() {
     };
 
     const filteredTodos = todos.filter(todo => {
-        const matchesSearchQuery = todo.title.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearchQuery = todo.title.includes(searchQuery.toLowerCase());
         const matchesCompletedFilter = showCompletedOnly ? todo.completed : true;
         return matchesSearchQuery && matchesCompletedFilter;
     });
+    // console.log(todos);
 
     return (
         <>
