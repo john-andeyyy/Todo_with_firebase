@@ -35,7 +35,7 @@ export default function SignUp() {
             if (response.ok) {
                 console.log("User signed up successfully!", data);
 
-                navigate('/TodoDashboard');
+                navigate('/LoginPage');
 
             } else {
                 setError(data.error.message);

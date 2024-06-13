@@ -68,23 +68,16 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
                 const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
                 // ! input users data
-
-                const email = localStorage.getItem('email');
-                const pass = localStorage.getItem('password');
-
                 const userData = {
-                    // id:0,
                     title: newTitle,
                     description: newDescription,
                     time: currentTime,
                     completed: false,
-                    // email: email,
-                    // pass: pass
+                    
                 };
 
                 const localid = localStorage.getItem('localId')
 
-                // Define the Firebase Realtime Database URL
                 const dburl = import.meta.env.VITE_FIREBASE_DB_URL
                 const databaseURL = `${dburl}/tasks/${localid}/TaskList.json`
 
@@ -93,8 +86,6 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
                     // Perform the post request
                     const response = await fetch(databaseURL, {
                         method: 'POST',
-                        // POST the Firebase client generates a unique
-                        //PUT Write or replace data to a defined path,
                         headers: {
                             'Content-Type': 'application/json'
                         },

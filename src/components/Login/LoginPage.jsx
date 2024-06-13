@@ -35,12 +35,6 @@ export default function LoginPage() {
                 localStorage.setItem('idToken', data.idToken);
                 localStorage.setItem('localId', data.localId);
                 
-                
-                // !!
-                // localStorage.setItem('email', email );
-                // localStorage.setItem('password', password );
-
-
                 TimeOut(data.expiresIn);
                 navigate('/TodoDashboard');
             } else {
