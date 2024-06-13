@@ -7,7 +7,7 @@ export function Mark_as_done({ currentTodo, markCompleted, RemoveComplete, setSh
         const todoRef = `${dburl}/tasks/${localId}/TaskList/${id}.json`;
 
         const updatedTodo = {
-            ...currentTodo,
+            // ...currentTodo,
             completed: true // Set completed to true
         };
 
@@ -38,7 +38,7 @@ export function Mark_as_done({ currentTodo, markCompleted, RemoveComplete, setSh
         const todoRef = `${dburl}/tasks/${localId}/TaskList/${id}.json`;
 
         const updatedTodo = {
-            ...currentTodo,
+            // ...currentTodo,
             completed: false // Set completed to false
         };
 

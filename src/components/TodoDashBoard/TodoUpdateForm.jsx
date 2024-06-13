@@ -23,7 +23,7 @@ export function TodoUpdateForm({
     const handleUpdateClick = (id) => {
         if (updatedTitle.length > 0 && updatedTitle !== currentTodo.title) {
             const updatedTodo = {
-                ...currentTodo,
+                // ...currentTodo,
                 title: updatedTitle,
                 description: updatedDescription
             };
