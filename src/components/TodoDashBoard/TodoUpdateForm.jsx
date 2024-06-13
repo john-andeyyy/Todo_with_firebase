@@ -21,7 +21,7 @@ export function TodoUpdateForm({
     }, [currentTodo]);
 
     const handleUpdateClick = (id) => {
-        if (updatedTitle.length > 0 && updatedTitle !== currentTodo.title) {
+        if (updatedTitle.length > 0) {
             const updatedTodo = {
                 // ...currentTodo,
                 title: updatedTitle,
@@ -53,7 +53,7 @@ export function TodoUpdateForm({
                     console.error('Error updating todo:', error);
                 });
         } else {
-            setAlert('Please enter a new title!');
+            setAlert('Please enter a title!');
         }
 
     }
