@@ -10,7 +10,7 @@ export function TodoList({ todos, toggleMark, toggleUpdate }) {
                 ))
             ) : (
                 <div className="text-white font-medium flex ">
-                    <h1 className='m-auto'>Nothing to show</h1>
+                    <h1 className='m-auto w-full'>Nothing to show</h1>
                 </div>
             )}
         </div>

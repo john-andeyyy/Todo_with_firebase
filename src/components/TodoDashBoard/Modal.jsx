@@ -5,7 +5,7 @@ function Modal({ children, isVisible, handleClose }) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="relative bg-white rounded-3xl py-5 px-4 m-5 w-[31rem] mx-auto">
+            <div className="relative bg-white rounded-1xl py-5 px-4 m-5 w-[31rem] mx-auto">
                 {/* <h1 >{title}</h1> */}
                 <button
                     onClick={handleClose}

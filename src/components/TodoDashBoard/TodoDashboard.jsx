@@ -5,8 +5,12 @@ import { CreateTodo } from './CreateTodo';
 import { Mark_as_done } from './TodoMarkAsDone';
 import { TodoUpdateForm } from './TodoUpdateForm';
 import Header from './Header';
+import { useNavigate } from 'react-router-dom';
+
 
 function TodoDashboard() {
+    const navigate = useNavigate();
+
     const [showCreateTodo, setShowCreateTodo] = useState(false);
 
     const [showMark, setShowMark] = useState(false);
@@ -23,9 +27,7 @@ function TodoDashboard() {
 
 
 
-    const [todos, setTodos] = useState([
-
-    ]);
+    const [todos, setTodos] = useState([]);
 
 
 
@@ -62,6 +64,39 @@ function TodoDashboard() {
     useEffect(() => {
         fetchTasks();
     }, [todos]);
+
+
+    useEffect(() => {
+        const idToken = localStorage.getItem('idToken');
+
+        // Check if idToken exists in localStorage
+        if (idToken) {
+
+
+            // Set interval to check expiry
+            const interval = setInterval(() => {
+                const currentTime = new Date();
+                const storedExpiryTime = new Date(localStorage.getItem('expiryTime'));
+
+                if (currentTime >= storedExpiryTime) {
+                    // Clear localStorage items and interval
+                    localStorage.removeItem('expiresIn');
+                    localStorage.removeItem('idToken');
+                    localStorage.removeItem('localId');
+                    localStorage.removeItem('expiryTime');
+                    clearInterval(interval);
+
+                    // Alert user and navigate to login page
+                    alert("Session Expired. Please Login Again");
+
+                    navigate('/LoginPage');
+                }
+            }, 1000);
+
+            // Clean up interval on component unmount
+            return () => clearInterval(interval);
+        }
+    }, []);
 
 
 

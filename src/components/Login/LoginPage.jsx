@@ -34,8 +34,15 @@ export default function LoginPage() {
                 localStorage.setItem('expiresIn', data.expiresIn);
                 localStorage.setItem('idToken', data.idToken);
                 localStorage.setItem('localId', data.localId);
-                
-                TimeOut(data.expiresIn);
+
+                const timeoutInSeconds = Number(data.expiresIn);
+                const currentTime = new Date();
+
+                const expiryTime = new Date(currentTime.getTime() + timeoutInSeconds * 1000);
+                localStorage.setItem('expiryTime', expiryTime);
+
+
+
                 navigate('/TodoDashboard');
             } else {
                 setError(data.error.message);
@@ -45,32 +52,7 @@ export default function LoginPage() {
         }
     };
 
-    const TimeOut = (time) => {
-        const timeoutInSeconds = Number(time);
 
-        const currentTime = new Date();
-
-        //! Calculate the expiry time current time and expired token
-        const expiryTime = new Date(currentTime.getTime() + timeoutInSeconds * 1000);
-
-        localStorage.setItem('expiryTime', expiryTime);
-
-        const interval = setInterval(() => {
-            const currentTime = new Date();
-            const storedExpiryTime = new Date(localStorage.getItem('expiryTime'));
-
-            if (currentTime >= storedExpiryTime) {
-                localStorage.removeItem('expiresIn');
-                localStorage.removeItem('idToken');
-                localStorage.removeItem('localId');
-                localStorage.removeItem('expiryTime');
-
-                clearInterval(interval);
-                alert("The Session is Expired Please Login Again")
-                navigate('/LoginPage');
-            }
-        }, 1000);
-    };
 
     return (
         <div className='text-center flex px-2'>
@@ -110,6 +92,16 @@ export default function LoginPage() {
                         </button>
                     </div>
                 </form>
+                <div className=" py-5 text-white font-semibold text-2xl"
+                    onClick={
+                        () => {
+                            navigate('/ForgotPassword')
+
+                        }
+                    }
+                >
+                    forget password
+                </div>
             </div>
         </div>
     );

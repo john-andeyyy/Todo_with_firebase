@@ -25,8 +25,8 @@ export function Mark_as_done({ currentTodo, markCompleted, RemoveComplete, setSh
                 // !the function of mark complete is the function for the static todo web app
                 // markCompleted(id);
                 setShowMark(false)
-                
-                })
+
+            })
             .catch(error => {
                 console.error('Error updating todo:', error);
             });
@@ -49,7 +49,7 @@ export function Mark_as_done({ currentTodo, markCompleted, RemoveComplete, setSh
             },
             body: JSON.stringify(updatedTodo)
         })
-        .then(response => {
+            .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to update todo');
                 }
@@ -68,15 +68,17 @@ export function Mark_as_done({ currentTodo, markCompleted, RemoveComplete, setSh
                 <div>
                     <div className="flex justify-between py-2">
                         <div className="flex-1">
-                            <h2 className="font-bold text-xl ">
-                                Title: <span className='pl-4 break-all font-semibold capitalize'>{currentTodo.title}</span>
+                            <h2 className="font-semibold text-xl ">
+                                Title: <span className='pl-4 break-all font-semibold capitalize'>
+                                    <br />{currentTodo.title}</span>
                             </h2>
                         </div>
                         <div className="flex-shrink-0">
                             <p className='text-gray-400'>{currentTodo.time}</p>
                         </div>
                     </div>
-                    <p className='text-gray-400'>Description: <br /><span className='text-black pl-4 break-words capitalize'>{currentTodo.description}</span></p>
+                    <p className='font-semibold text-xl '>Description: <br />
+                    <span className='text-black break-words capitalize'>{currentTodo.description}</span></p>
                     {!currentTodo.completed ? (
                         <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
                             <button
