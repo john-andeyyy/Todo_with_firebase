@@ -95,6 +95,9 @@ function TodoDashboard() {
 
             // Clean up interval on component unmount
             return () => clearInterval(interval);
+        }else{
+            navigate('/LoginPage');
+
         }
     }, []);
 
