@@ -13,7 +13,7 @@ export default function SignUp() {
 
         const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
         const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
-        
+
         console.log(apiKey);
         const payload = {
             email: email,
@@ -77,10 +77,14 @@ export default function SignUp() {
                         />
                     </div>
                     {error && <p className="text-red-500">{error}</p>}
-                    
-                    <button type="submit"
-                        className='text-xl font-semibold text-white bg-blue-500 px-10 py-2 rounded-lg hover:bg-blue-800'
-                    >Sign Up</button>
+
+                    <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
+                        <button
+                            className="w-full py-3"
+                            type='submit'>
+                            Sign Up
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

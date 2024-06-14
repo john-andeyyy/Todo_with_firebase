@@ -1,9 +1,9 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 export default function Landingpage() {
-    
+
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -11,21 +11,30 @@ export default function Landingpage() {
         if (token) {
             // setIsUserLoggedIn(true);
             navigate('/TodoDashboard');
-        }else{navigate('/')
+        } else {
+            navigate('/')
 
         }
     }, [navigate]);
 
 
-    
+
 
 
 
     return (
-        <div className='flex justify-center items-center h-screen '>
-            <div className='text-white font-bold text-center w-[31rem]'>
-                <h1>Welcome to Todo Web App...</h1>
+        <>
+
+            <div
+                className={`flex px-4 my-5 w-[31rem] mx-auto  text-center text-white font-semibold`}>
+                <h1
+                    className='mx-auto'>
+                    Welcome to Todo Web app!
+                </h1>
             </div>
-        </div>
+
+
+
+        </>
     );
 }

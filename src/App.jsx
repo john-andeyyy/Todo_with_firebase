@@ -8,7 +8,6 @@ import SignupPage from './components/Signup/SignupPage';
 import TodoDashboard from './components/TodoDashBoard/TodoDashboard';
 import Landingpage from './components/Landingpage'
 import UserChangepass from './components/Login/UserChangepass';
-import AddUserData from './components/Login/AddUserData';
 import ForgotPassword from './components/Login/ForgotPassword';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
         <Route path="/SignupPage" element={<SignupPage />} />
         <Route path="/TodoDashboard" element={<TodoDashboard />} />
         <Route path="/UserChangepass" element={<UserChangepass />} />
-        <Route path="/AddUserData" element={<AddUserData />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
       </Routes>
     </Router>

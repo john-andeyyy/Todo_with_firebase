@@ -69,16 +69,21 @@ export function Mark_as_done({ currentTodo, markCompleted, RemoveComplete, setSh
                     <div className="flex justify-between py-2">
                         <div className="flex-1">
                             <h2 className="font-semibold text-xl ">
-                                Title: <span className='pl-4 break-all font-semibold capitalize'>
-                                    <br />{currentTodo.title}</span>
+                                Title: 
+                                <br />
+                                <span className=' break-all font-normal capitalize px-4'>
+                                    {currentTodo.title}</span>
                             </h2>
                         </div>
                         <div className="flex-shrink-0">
                             <p className='text-gray-400'>{currentTodo.time}</p>
                         </div>
                     </div>
-                    <p className='font-semibold text-xl '>Description: <br />
-                    <span className='text-black break-words capitalize'>{currentTodo.description}</span></p>
+                    <p className='font-semibold text-xl '>
+                        Description: <br />
+                        <span className='text-black break-words capitalize font-normal px-4'>
+                            {currentTodo.description}
+                        </span></p>
                     {!currentTodo.completed ? (
                         <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
                             <button

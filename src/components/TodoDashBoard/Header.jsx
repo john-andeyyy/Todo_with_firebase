@@ -13,12 +13,12 @@ function Header() {
     return (
         <div className="relative flex justify-between pt-4 px-3 w-[32rem] mx-auto text-white">
             <div>
-                <span className="material-symbols-outlined cursor-pointer" onClick={toggleSidebar}>
+                <span className="material-symbols-outlined cursor-pointer  text-3xl" onClick={toggleSidebar}>
                     menu
                 </span>
             </div>
             <div>
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined text-3xl">
                     notifications
                 </span>
             </div>

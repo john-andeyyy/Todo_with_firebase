@@ -86,21 +86,30 @@ export default function LoginPage() {
                             autoComplete='off'
                         />
                     </div>
-                    <div className="text-white rounded-3xl font-bold mt-8 text-center">
+                    {/* <div className="text-white rounded-3xl font-bold mt-8 text-center">
                         <button className='py-3 px-10 bg-blue-500 rounded-lg  text-xl' type="submit">
                             Login
                         </button>
-                    </div>
-                </form>
-                <div className=" py-5 text-white font-semibold text-2xl"
-                    onClick={
-                        () => {
-                            navigate('/ForgotPassword')
+                    </div> */}
 
-                        }
+                    <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
+                        <button
+                            className="w-full py-3"
+                            type='submit'>
+                            Login
+                        </button>
+                    </div>
+
+
+
+
+                </form>
+                <div className=" py-5 text-blue-400 font-semibold text-lg cursor-pointer hover:text-blue-500 hover:underline"
+                    onClick={
+                        () => { navigate('/ForgotPassword') }
                     }
                 >
-                    forget password
+                    Forgot password?
                 </div>
             </div>
         </div>
