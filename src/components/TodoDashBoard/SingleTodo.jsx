@@ -4,7 +4,7 @@ export function SingleTodo({ todo, toggleMark, toggleUpdate }) {
     return (
         <div
             key={todo.id}
-            className={`flex px-4 rounded-xl my-5 w-[31rem] mx-auto bg-white shadow-md shadow-gray-300 self-start hover:bg-gray-100 text-center`}
+            className={`flex gap-4 px-4 rounded-xl my-5 w-[31rem] mx-auto bg-white shadow-md shadow-gray-300 self-start hover:bg-gray-100 text-center`}
         >
             <button
                 id="icon"
@@ -17,7 +17,9 @@ export function SingleTodo({ todo, toggleMark, toggleUpdate }) {
                     onChange={() => toggleMark(todo)}
                     className='form-checkbox h-5 w-5'
                 />
+                
             </button>
+
             <button
                 id="text"
                 onClick={() => toggleUpdate(todo)}

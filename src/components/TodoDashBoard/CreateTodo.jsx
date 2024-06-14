@@ -52,6 +52,7 @@ export function CreateTodo({ setTodos, toggleCreateTodo, showCreateTodo }) {
 
                     const data = await response.json();
                     console.log("Data successfully added:", data);
+                    seterror()
 
                     // ! reset the state
                     setNewTitle('');

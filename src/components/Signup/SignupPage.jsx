@@ -48,7 +48,8 @@ export default function SignUp() {
     return (
         <div className='text-center flex px-2'>
             <div className="m-auto">
-                <h1 className='text-white font-bold text-center text-xl py-3'>Sign Up</h1>
+                <h1 className="flex text-3xl font-bold p-3 rounded-xl py-4 my-5 w-[31rem] mx-auto text-white">Sign Up</h1>
+
                 <form onSubmit={handleSubmit}>
                     <div className="mb-5">
                         <input
@@ -86,6 +87,22 @@ export default function SignUp() {
                         </button>
                     </div>
                 </form>
+
+
+
+                <div className="flex py-3 justify-center text-white">
+                    <p clas>Have a account?  </p>
+                    <button
+                        onClick={() => {
+                            navigate('/LoginPage')
+                        }}
+                    >
+                        <span
+                            className='pl-1 hover:text-blue-500'
+                        > click here.</span>
+                    </button>
+                </div>
+                
             </div>
         </div>
     );

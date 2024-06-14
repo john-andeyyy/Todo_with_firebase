@@ -73,7 +73,7 @@ export default function LoginPage() {
                             autoComplete='off'
                         />
                     </div>
-                    <div className="mb-5">
+                    <div className="mb-1">
                         <input
                             className="flex w-[31rem] py-4 px-4 rounded-lg border border-gray focus:outline-none shadow text-xl mx-auto
                                 bg-[#222630] outline-none text-white transition-colors duration-100 border-solid focus:border-[#596A95] border-[#2B3040]"
@@ -86,13 +86,16 @@ export default function LoginPage() {
                             autoComplete='off'
                         />
                     </div>
-                    {/* <div className="text-white rounded-3xl font-bold mt-8 text-center">
-                        <button className='py-3 px-10 bg-blue-500 rounded-lg  text-xl' type="submit">
-                            Login
-                        </button>
-                    </div> */}
+                    <div 
+                    className=" text-white  cursor-pointer hover:text-blue-400 hover:underline text-left"
+                        onClick={
+                            () => { navigate('/ForgotPassword') }
+                        }
+                    >Forgot password?
+                    </div>
 
-                    <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-8">
+
+                    <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-5">
                         <button
                             className="w-full py-3"
                             type='submit'>
@@ -106,10 +109,9 @@ export default function LoginPage() {
                 </form>
                 <div className=" py-5 text-blue-400 font-semibold text-lg cursor-pointer hover:text-blue-500 hover:underline"
                     onClick={
-                        () => { navigate('/ForgotPassword') }
+                        () => { navigate('/SignupPage') }
                     }
-                >
-                    Forgot password?
+                >Create a Account
                 </div>
             </div>
         </div>

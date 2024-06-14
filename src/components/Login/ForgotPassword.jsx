@@ -60,7 +60,7 @@ export default function ForgotPassword() {
                             autoComplete='off'
                         />
                     </div>
-                    <div className="text-white rounded-3xl font-bold mt-8 text-center">
+                    <div className="text-white rounded-3xl font-bold mt-5 text-center">
                         <button className='py-3 px-10 bg-blue-500 rounded-lg text-xl' type="submit">
                             Reset Password
                         </button>
