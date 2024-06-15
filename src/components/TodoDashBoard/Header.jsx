@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 // import '../style/BurgerMenu.';  // Ensure the correct import of CSS file
 // import '../NavBar/BurgerMenu.css';  // Ensure the correct import of CSS file
 import NavBar from '../NavBar/NavBar';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const navigate = useNavigate();
+
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -13,13 +16,17 @@ function Header() {
     return (
         <div className="relative flex justify-between pt-4 px-3 w-[32rem] mx-auto text-white">
             <div>
-                <span className="material-symbols-outlined cursor-pointer  text-3xl" onClick={toggleSidebar}>
+                <span className="material-symbols-outlined cursor-pointer  text-4xl" onClick={toggleSidebar}>
                     menu
                 </span>
             </div>
             <div>
-                <span className="material-symbols-outlined text-3xl">
-                    notifications
+                <span className="material-symbols-outlined text-4xl"
+                onClick={()=>{
+                    navigate('/Info')
+                }}
+                >
+                    info
                 </span>
             </div>
 

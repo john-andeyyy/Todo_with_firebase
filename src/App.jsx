@@ -9,6 +9,7 @@ import TodoDashboard from './components/TodoDashBoard/TodoDashboard';
 import Landingpage from './components/Landingpage'
 import UserChangepass from './components/Login/UserChangepass';
 import ForgotPassword from './components/Login/ForgotPassword';
+import Info from './components/Login/Info';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/SignupPage" element={<SignupPage />} />
         <Route path="/TodoDashboard" element={<TodoDashboard />} />
         <Route path="/UserChangepass" element={<UserChangepass />} />
-          <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/Info" element={<Info />} />
       </Routes>
     </Router>
   );

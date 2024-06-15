@@ -86,13 +86,6 @@ export default function LoginPage() {
                             autoComplete='off'
                         />
                     </div>
-                    <div 
-                    className=" text-white  cursor-pointer hover:text-blue-400 hover:underline text-left"
-                        onClick={
-                            () => { navigate('/ForgotPassword') }
-                        }
-                    >Forgot password?
-                    </div>
 
 
                     <div className="text-center bg-blue-500 text-white rounded-2xl font-bold mt-5">
@@ -107,12 +100,27 @@ export default function LoginPage() {
 
 
                 </form>
-                <div className=" py-5 text-blue-400 font-semibold text-lg cursor-pointer hover:text-blue-500 hover:underline"
-                    onClick={
-                        () => { navigate('/SignupPage') }
-                    }
-                >Create a Account
+
+                <div className="flex justify-between">
+
+                    <button 
+                    className=" py-5 text-blue-400 font-semibold text-lg cursor-pointer hover:text-blue-500 hover:underline"
+                        onClick={
+                            () => { navigate('/SignupPage') }
+                        }
+                    >Create a Account
+                    </button>
+
+                    <button
+                        className=" text-white  cursor-pointer hover:text-blue-400 hover:underline text-left"
+                        onClick={
+
+                            () => { navigate('/ForgotPassword') }
+                        }
+                    >Forgot password?
+                    </button>
                 </div>
+
             </div>
         </div>
     );
